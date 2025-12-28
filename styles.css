@@ -1,0 +1,429 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #faf9f7;
+    --foreground: #3d3a33;
+    --card: #fefefe;
+    --card-foreground: #3d3a33;
+    --primary: #a0735c;
+    --primary-foreground: #faf9f7;
+    --secondary: #ebe8e3;
+    --secondary-foreground: #3d3a33;
+    --muted: #f0ede8;
+    --muted-foreground: #74706a;
+    --accent: #a0735c;
+    --accent-foreground: #faf9f7;
+    --border: #ddd9d1;
+    --input: #ddd9d1;
+    --ring: #a0735c;
+    --error: #ef4444;
+    --radius: 0.5rem;
+}
+
+.dark {
+    --background: #2e2b25;
+    --foreground: #f5f4f2;
+    --card: #333027;
+    --card-foreground: #f5f4f2;
+    --primary: #b88968;
+    --primary-foreground: #2e2b25;
+    --secondary: #4d4a42;
+    --secondary-foreground: #f5f4f2;
+    --muted: #47453d;
+    --muted-foreground: #a6a39a;
+    --accent: #b88968;
+    --accent-foreground: #2e2b25;
+    --border: #4d4a42;
+    --input: #4d4a42;
+    --ring: #b88968;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+    transition: max-width 0.3s ease;
+}
+
+.container.expanded {
+    max-width: 90rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.vinyl-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.vinyl-icon circle {
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--foreground);
+    letter-spacing: -0.025em;
+}
+
+.tagline {
+    color: var(--muted-foreground);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+.main-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.left-column {
+    flex: 0 0 auto;
+    max-width: 600px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.right-column {
+    flex: 0 0 0;
+    min-width: 0;
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.main-layout.has-playlist .left-column {
+    flex: 0 0 400px;
+    position: sticky;
+    top: 2rem;
+    max-width: 400px;
+}
+
+.main-layout.has-playlist .right-column {
+    flex: 1;
+    max-width: none;
+    opacity: 1;
+}
+
+.input-section {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+    font-weight: 500;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    min-height: 120px;
+    border-radius: var(--radius);
+    border: 1px solid var(--input);
+    background: var(--card);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    font-family: inherit;
+    resize: none;
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px var(--ring), 0 0 0 4px rgba(160, 115, 92, 0.1);
+}
+
+textarea::placeholder {
+    color: var(--muted-foreground);
+}
+
+.generate-btn {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    margin-top: 1rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.generate-btn:hover:not(:disabled) {
+    background: #8f6552;
+}
+
+.generate-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.generate-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--error);
+    color: var(--error);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.playlist-section {
+    animation: fadeIn 0.5s ease-in;
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.playlist-header {
+    margin-bottom: 1.5rem;
+}
+
+.playlist-section h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+}
+
+.playlist-mood {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    font-style: italic;
+}
+
+.playlist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.song-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.song-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.song-card-content {
+    display: flex;
+    gap: 1rem;
+}
+
+.song-number {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(160, 115, 92, 0.1);
+    color: var(--primary);
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.song-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.song-info {
+    margin-bottom: 0.5rem;
+}
+
+.song-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.125rem;
+    color: var(--foreground);
+}
+
+.song-artist {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+.song-notes {
+    color: rgba(61, 58, 51, 0.8);
+    line-height: 1.5;
+    font-size: 0.875rem;
+}
+
+.examples-section {
+    text-align: left;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.examples-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 0.75rem;
+}
+
+.examples-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.example-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--foreground);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    text-align: left;
+}
+
+.example-btn:hover:not(:disabled) {
+    background: var(--accent);
+    color: var(--accent-foreground);
+}
+
+.example-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+@media (max-width: 1024px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .left-column {
+        flex: 1;
+        position: static;
+        width: 100%;
+    }
+
+    .right-column {
+        width: 100%;
+    }
+
+    .examples-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .examples-section {
+        text-align: center;
+    }
+
+    .example-btn {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .tagline {
+        font-size: 1rem;
+    }
+
+    .song-card-content {
+        gap: 0.75rem;
+    }
+
+    .song-number {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeVinyl - Your Mood, Your Music</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg class="vinyl-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="2" fill="none" style="color: var(--primary)"/>
+                    <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5" fill="none" style="color: var(--primary); opacity: 0.6"/>
+                    <circle cx="20" cy="20" r="9" stroke="currentColor" stroke-width="1.5" fill="none" style="color: var(--primary); opacity: 0.4"/>
+                    <circle cx="20" cy="20" r="3" fill="currentColor" style="color: var(--primary)"/>
+                </svg>
+                <h1>VibeVinyl</h1>
+            </div>
+            <p class="tagline">Tell us exactly how you're feeling right now, and we'll curate a 5-song playlist with liner notes explaining why each track captures your vibe.</p>
+        </header>
+
+        <main>
+            <div class="main-layout">
+                <div class="left-column">
+                    <div class="input-section">
+                        <label for="vibeInput">Describe your vibe</label>
+                        <textarea 
+                            id="vibeInput" 
+                            placeholder="I'm sitting in a coffee shop on a rainy Tuesday and feeling a bit nostalgic..."
+                            rows="4"
+                        ></textarea>
+                        <button id="generateBtn" class="generate-btn">
+                            <span class="btn-text">Generate Playlist</span>
+                            <span class="btn-loader" style="display: none;">Curating your playlist...</span>
+                        </button>
+                    </div>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                    <div id="examplesSection" class="examples-section">
+                        <h3 class="examples-title">Try these vibes:</h3>
+                        <div class="examples-buttons">
+                            <button class="example-btn" data-example="Early morning coffee, watching the sunrise">Early morning coffee, watching the sunrise</button>
+                            <button class="example-btn" data-example="Late night coding session, focused energy">Late night coding session, focused energy</button>
+                            <button class="example-btn" data-example="Sunday afternoon, lazy and content">Sunday afternoon, lazy and content</button>
+                            <button class="example-btn" data-example="Driving through the city at golden hour">Driving through the city at golden hour</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div id="playlistSection" class="playlist-section" style="display: none;">
+                        <div class="playlist-header">
+                            <h2>Your Curated Playlist</h2>
+                            <p class="playlist-mood" id="playlistMood"></p>
+                        </div>
+                        <div id="playlistContainer" class="playlist-container"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Gemini AI</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
